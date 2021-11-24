@@ -66,11 +66,15 @@ if __name__=="__main__":
 
     repo   = git.Repo()
     commit = repo.head.object.hexsha
-    flist  = [item.a_path for item in repo.index.diff(None)]
+
+    with open("api/.history", encoding="utf-8") as f:
+        history = f.read()
+    flist = [item.a_path for item in repo.index.diff(repo.commit(history))]
 
     if args.force:
         flist = args.files
-        print("Forced to update: {}".format(flist))
+
+    print("Update list: {}".format(flist))
 
     for file in flist:
         if not(file.endswith(".md") and file.startswith("md")): continue

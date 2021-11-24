@@ -32,6 +32,7 @@ jobs:
         git config --global user.name 'Actions'
         git config --global user.email '42015599+capric98@users.noreply.github.com'
         if [ -n "$(git status --porcelain)" ]; then
+            echo -n $(git rev-parse HEAD | tr -d "\n") > api/.history
             git commit -am "Updated by Actions."
         fi
         git push
