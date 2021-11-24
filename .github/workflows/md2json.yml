@@ -3,7 +3,7 @@ name: markdown to json
 on:
   push:
     paths:
-    - "md/**"
+    - "markdown/**"
     - "md2json.py"
 
 jobs:

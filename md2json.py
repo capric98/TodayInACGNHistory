@@ -77,7 +77,7 @@ if __name__=="__main__":
     print("Update list: {}".format(flist))
 
     for file in flist:
-        if not(file.endswith(".md") and file.startswith("md")): continue
+        if not(file.endswith(".md") and file.startswith("markdown")): continue
 
         fdate  = os.path.basename(file).split(".")[0]
         lang   = os.path.basename(os.path.dirname(file))
