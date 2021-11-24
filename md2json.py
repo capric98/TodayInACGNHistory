@@ -69,7 +69,7 @@ if __name__=="__main__":
 
     with open("api/.history", encoding="utf-8") as f:
         history = f.read()
-    flist = [item.a_path for item in repo.index.diff(repo.commit(history.decode("utf-8")))]
+    flist = [item.a_path for item in repo.index.diff(repo.commit(history))]
 
     if args.force:
         flist = args.files
