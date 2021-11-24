@@ -1,0 +1,16 @@
+{
+    "events": [
+        {
+            "title": "text after '-'",
+            "date": "YYYY-MM-DD",
+            "content": "markdown",
+            "addition": {
+                "something": "in toml code block"
+            }
+        }
+    ],
+    "lastUpdated": {
+        "date": "YYYY-MM-DD",
+        "commit": "git sha1sum"
+    }
+}
