@@ -2,7 +2,7 @@
     "events": [
         {
             "title": "text after '-'",
-            "date": "YYYY-MM-DD",
+            "date": "YYYY-MM-DD (YYYY may equal '????' or sth else)",
             "content": "markdown",
             "addition": {
                 "something": "in toml code block"
