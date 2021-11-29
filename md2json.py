@@ -48,7 +48,7 @@ def trans(mdf, jsf: os.PathLike, today, commit: str):
             # print(newcontent[addpos:].removeprefix("```toml"))
 
             jobj["events"][k]["content"] = newcontent[:addpos]
-            jobj["addition"] = toml.loads(newcontent[addpos:].removeprefix("```toml"))
+            jobj["events"][k]["addition"] = toml.loads(newcontent[addpos:].removeprefix("```toml"))
 
         jobj["events"][k]["content"] = jobj["events"][k]["content"].rstrip()
 
