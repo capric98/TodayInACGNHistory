@@ -5,9 +5,12 @@ import os
 import json
 
 import git
+from git.types import PathLike
 import toml
 
 from datetime import date
+
+__markdown_path__ = "markdown"
 
 def trans(mdf, jsf: os.PathLike, today, commit: str):
     print(mdf, "->", jsf)
@@ -55,6 +58,15 @@ def trans(mdf, jsf: os.PathLike, today, commit: str):
     with open(jsf, mode="w", encoding="utf-8") as f:
         f.write(json.dumps(jobj))
 
+def all_markdown(path: list[os.PathLike]) -> list[PathLike]:
+    flist = []
+    for root, _, files in os.walk(path):
+        for f in files:
+            flist.append(os.path.join(root, f))
+
+    return flist
+
+
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Markdown to json.')
     parser.add_argument("--force", "-F", action=argparse.BooleanOptionalAction, help="force update")
@@ -71,16 +83,19 @@ if __name__=="__main__":
         history = f.read()
     flist = [item.a_path for item in repo.index.diff(repo.commit(history))]
 
-    if args.force:
+    if os.path.basename(__file__) in [os.path.basename(f) for f in flist]:
+        print("Update all jsons due to the change of this script.")
+        flist = all_markdown(__markdown_path__)
+    elif args.force:
         flist = args.files
 
-    print("Update list: {}".format(flist))
+    # print("Update list: {}".format(flist))
 
     for file in flist:
-        if not(file.endswith(".md") and file.startswith("markdown")): continue
+        if not(file.endswith(".md") and file.startswith(__markdown_path__)): continue
 
         fdate  = os.path.basename(file).split(".")[0]
         lang   = os.path.basename(os.path.dirname(file))
-        target = os.path.join("api/json", fdate+"."+lang+".json")
+        target = os.path.join("api/json", "{}.{}.json".format(fdate, lang))
 
         trans(file, target, today, commit)
