@@ -5,7 +5,6 @@ import os
 import json
 
 import git
-from git.types import PathLike
 import toml
 
 from datetime import date
@@ -58,7 +57,7 @@ def trans(mdf, jsf: os.PathLike, today, commit: str):
     with open(jsf, mode="w", encoding="utf-8") as f:
         f.write(json.dumps(jobj))
 
-def all_markdown(path: list[os.PathLike]) -> list[PathLike]:
+def all_markdown(path: list[os.PathLike]) -> list[os.PathLike]:
     flist = []
     for root, _, files in os.walk(path):
         for f in files:
